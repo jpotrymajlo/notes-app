@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { HelpBlock, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 //import LoaderButton from "../components/LoaderButton";
-//import { useAppContext } from "../libs/contextLib";
+import { useAppContext } from "../libs/contextLib";
 //import { useFormFields } from "../libs/hooksLib";
 //import { onError } from "../libs/errorLib";
 import "./Signup.css";
@@ -18,7 +18,7 @@ export default function Signup() {
 */
     const history = useHistory();
     const [newUser, setNewUser] = useState(null);
-//    const { userHasAuthenticated } = useAppContext();
+    const { userHasAuthenticated } = useAppContext();
 //    const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -58,7 +58,7 @@ export default function Signup() {
         try {
             await Auth.confirmSignUp(email, confirmationCode);
             await Auth.signIn(email, password);
-//            userHasAuthenticated(true);
+            userHasAuthenticated(true);
             history.push("/");
         } catch (e) {
             alert(e.message)
